@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dashboard</string>
+    <string name="title_Day">Date</string>
+    <string name="title_Month">Month</string>
+    <string name="title_Year">Year</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

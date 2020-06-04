@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <TextView
+        android:gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:id="@+id/id"
+        android:text="1"
+        />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/tv_product_name"
+        />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_count"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"/>
+</LinearLayout>
