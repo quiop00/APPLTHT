@@ -28,7 +28,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Products product=listProducts.get(position);
-        //holder.tvId.setText(product.getId());
+        holder.tvId.setText(product.getId()+"");
         holder.tvName.setText(product.getName());
         holder.tvCount.setText(product.getCount()+"");
     }
@@ -42,7 +42,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
         private TextView tvId,tvName,tvCount;
         public ViewHolder(View itemView){
             super(itemView);
-            //tvId=(TextView) itemView.findViewById(R.id.id);
+            tvId=(TextView) itemView.findViewById(R.id.id);
             tvName=itemView.findViewById(R.id.tv_product_name);
             tvCount=itemView.findViewById(R.id.tv_count);
         }

@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void init(){
         cVDashboard=(CardView) findViewById(R.id.card_view_dashboard);
-        cVRecovery=(CardView) findViewById(R.id.card_view_recovery);
+        //cVRecovery=(CardView) findViewById(R.id.card_view_recovery);
         cVStatus=(CardView) findViewById(R.id.card_view_status);
-        cVReport=(CardView) findViewById(R.id.card_view_report);
-        cVProducts=(CardView)findViewById(R.id.card_view_products_info);
+        //cVReport=(CardView) findViewById(R.id.card_view_report);
+        //cVProducts=(CardView)findViewById(R.id.card_view_products_info);
         cVExit=(CardView) findViewById(R.id.card_view_exit);
     }
     public void addOnClickListener(){
@@ -38,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*
         cVProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent  intent=new Intent(MainActivity.this,ProductsInformation.class);
                 startActivity(intent);
             }
-        });
+        });*/
         cVStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        cVReport.setOnClickListener(new View.OnClickListener() {
+       /* cVReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent  intent=new Intent(MainActivity.this,Report.class);
@@ -64,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             }
-        });
+        });*/
         cVExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(1);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }

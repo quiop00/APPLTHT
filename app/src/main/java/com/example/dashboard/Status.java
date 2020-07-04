@@ -86,10 +86,12 @@ public class Status extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     listHistories=new ArrayList<History>();
+                    int id=0;
                     for(DataSnapshot dataSnap:dataSnapshot.getChildren()){
+                        id+=1;
                         String startTime=dataSnap.getKey();
                         String endTime=dataSnap.getValue(String.class);
-                        listHistories.add(new History(startTime,endTime));
+                        listHistories.add(new History(id,startTime,endTime));
                     }
                     adapter=new HistoryViewAdapter(listHistories);
                     recyclerView.setAdapter(adapter);

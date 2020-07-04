@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dashboard.R;
 import com.example.modules.Products;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvName.setText(mData.get(position).getName());
-        holder.productImage.setImageResource(mData.get(position).getId());
+        //holder.productImage.setImageResource(mData.get(position).getId());
+        Picasso.get().load(mData.get(position).getPathImg()).into(holder.productImage);
 
     }
 

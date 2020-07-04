@@ -1,6 +1,9 @@
 package com.example.fragment;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.adapter.RecyclerAdapter;
 import com.example.dashboard.R;
@@ -39,9 +44,13 @@ public class Date extends Fragment {
     LineChart lineChart;
     LineDataSet lineDataSet;
     Calendar calendar;
+    TextView tvPickDate;
+    TextView tvTotal;
+    private int total;
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private List<Products> productsList;
+    DatePickerDialog.OnDateSetListener setListener;
     public Date() {
         // Required empty public constructor
     }
@@ -52,28 +61,51 @@ public class Date extends Fragment {
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_date, container, false);
-        lineChart=(LineChart)view.findViewById(R.id.line_chart_date);
-        lineDataSet=new LineDataSet(dataValues1(),"Product");
-        ArrayList<ILineDataSet> dataSets=new ArrayList<>();
-        dataSets.add(lineDataSet);
-        configLineDataSet();
-        LineData data=new LineData(dataSets);
-        configLineChart();
-        lineChart.setData(data);
-        lineChart.invalidate();
+        //lineChart=(LineChart)view.findViewById(R.id.line_chart_date);
+        //lineDataSet=new LineDataSet(dataValues1(),"Product");
+        //ArrayList<ILineDataSet> dataSets=new ArrayList<>();
+        //dataSets.add(lineDataSet);
+        //configLineDataSet();
+        //LineData data=new LineData(dataSets);
+        //configLineChart();
+        //lineChart.setData(data);
+        //lineChart.invalidate();
+        tvPickDate=view.findViewById(R.id.tv_pick_date);
+        tvTotal=view.findViewById(R.id.tv_total);
+        //get date
+        setCalendar();
+        tvPickDate.setText(calendar.getDate()+"/"+calendar.getMonth()+"/"+calendar.getYear());
+        //end get date
+        tvPickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(getContext(),
+                        AlertDialog.THEME_HOLO_DARK,setListener,calendar.getYear(),calendar.getMonth()-1,calendar.getDate());
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+        setListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.setDate(dayOfMonth);
+                calendar.setMonth(month+1);
+                calendar.setYear(year);
+                tvPickDate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                getDataFromFirebase();
+            }
+        };
         //recycler view start
         recyclerView=view.findViewById(R.id.rv_lists);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //recycler view end
 
-        //get date
-        setCalendar();
-        //end get date
+
 
         getDataFromFirebase();
         return view;
@@ -88,13 +120,17 @@ public class Date extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     productsList=new ArrayList<>();
+                    total=0;
+                    int id=0;
                     for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                         String name=snapshot.getKey();
-
+                        id=id+1;
                         int count=snapshot.getValue(Integer.class);
-                        Products products=new Products(name,count);
+                        Products products=new Products(id,name,count);
+                        total+=count;
                         productsList.add(products);
                     }
+                    tvTotal.setText(total+"");
                     adapter=new RecyclerAdapter(productsList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -105,6 +141,12 @@ public class Date extends Fragment {
 
             }
         });
+    }
+    public void setCalendar(){
+        java.util.Date date=new java.util.Date();
+        java.util.Calendar calendar=new GregorianCalendar();
+        calendar.setTime(date);
+        this.calendar=new Calendar(calendar.get(java.util.Calendar.YEAR),calendar.get(java.util.Calendar.MONTH)+1,calendar.get(java.util.Calendar.DAY_OF_MONTH));
     }
     // Get data from firebase
     private ArrayList<Entry> dataValues1(){
@@ -156,10 +198,5 @@ public class Date extends Fragment {
             }
         });
     }
-    public void setCalendar(){
-        java.util.Date date=new java.util.Date();
-        java.util.Calendar calendar=new GregorianCalendar();
-        calendar.setTime(date);
-        this.calendar=new Calendar(calendar.get(java.util.Calendar.YEAR),calendar.get(java.util.Calendar.MONTH)+1,calendar.get(java.util.Calendar.DAY_OF_MONTH));
-    }
+
 }

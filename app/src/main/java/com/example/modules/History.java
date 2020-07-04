@@ -3,10 +3,11 @@ package com.example.modules;
 public class History {
     private String startTime;
     private String endTime;
-
-    public History(String startTime, String endTime) {
+    private int id;
+    public History(int id,String startTime, String endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
+        this.id=id;
     }
 
     public String getStartTime() {
@@ -23,5 +24,13 @@ public class History {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -6,7 +6,7 @@
     <item android:id="@+id/navigation_month"
         android:title="@string/title_Month"
         android:icon="@drawable/ic_today_black_24dp"/>
-    <item android:id="@+id/navigation_year"
-        android:title="@string/title_Year"
-        android:icon="@drawable/ic_today_black_24dp"/>
+    <item android:id="@+id/navigation_home"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_home_black_24dp"/>
 </menu>

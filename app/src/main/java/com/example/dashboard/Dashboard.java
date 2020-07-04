@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -43,10 +44,9 @@ public class Dashboard extends AppCompatActivity {
                     loadFragment(fragment);
                     return true;
                 }
-                case R.id.navigation_year:{
-                    fragment=new Year();
-                    loadFragment(fragment);
-                    return true;
+                case R.id.navigation_home:{
+                    Intent intent=new Intent(Dashboard.this,MainActivity.class);
+                    startActivity(intent);
                 }
             }
             return false;

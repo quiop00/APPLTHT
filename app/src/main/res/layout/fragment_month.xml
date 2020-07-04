@@ -1,13 +1,80 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.example.fragment.Month">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_height="400dp">
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/line_chart_date"/>
+    </LinearLayout>
+    -->
+    <TextView
+        android:height="5dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/tv_pick_date"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+    <LinearLayout
+        android:background="#66ffff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="STT"
+            />
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Name"
+            />
+        <TextView
+            android:text="Count"
+            android:gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:nestedScrollingEnabled="true"
+            android:id="@+id/rv_lists"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_marginBottom="100dp"
+        android:background="#66ffff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="TOTAL"
+            />
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/tv_total"
+            android:gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

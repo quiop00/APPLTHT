@@ -28,6 +28,7 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         History history=list.get(position);
+        holder.id.setText(history.getId()+"");
         holder.startTime.setText(history.getStartTime());
         holder.endTime.setText(history.getEndTime());
     }
@@ -40,8 +41,10 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView startTime;
         private TextView endTime;
+        private TextView id;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            id=itemView.findViewById(R.id.tv_id);
             startTime=itemView.findViewById(R.id.start_time);
             endTime=itemView.findViewById(R.id.end_time);
 
